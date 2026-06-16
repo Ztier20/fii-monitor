@@ -1,0 +1,66 @@
+{
+  "RZAG11": {
+    "ticker": "RZAG11",
+    "nome": "Riza Agro FIAGRO",
+    "cnpj": "29.138.199/0001-01",
+    "tipo": "FIAGRO",
+    "categoria": "papel",
+    "timestamp": "2026-06-15T22:55:35.408351",
+    "cvm": {},
+    "pdfs": [],
+    "status": "erro",
+    "erros": [
+      "CVM: sem dados"
+    ]
+  },
+  "DEVA11": {
+    "ticker": "DEVA11",
+    "nome": "Devant Recebíveis Imobiliários",
+    "cnpj": "37.087.810/0001-37",
+    "tipo": "FII",
+    "categoria": "papel",
+    "timestamp": "2026-06-15T22:55:36.103406",
+    "cvm": {
+      "fonte": "CVM-FII",
+      "data_referencia": "2026-04-01",
+      "nome": "DEVANT RECEBÍVEIS IMOBILIÁRIOS FII",
+      "pl": "1243631765.86",
+      "cri": "",
+      "fii": "53263977.56",
+      "cotas_emitidas": "14044908",
+      "valor_cota_patrimonial": "",
+      "rentabilidade_mensal": "",
+      "dy_mensal": "",
+      "cotistas": "",
+      "taxa_admin": ""
+    },
+    "pdfs": [],
+    "status": "ok",
+    "erros": []
+  },
+  "KNSC11": {
+    "ticker": "KNSC11",
+    "nome": "Kinea Securities FII",
+    "cnpj": "35.864.448/0001-38",
+    "tipo": "FII",
+    "categoria": "papel",
+    "timestamp": "2026-06-15T22:55:38.810141",
+    "cvm": {
+      "fonte": "CVM-FII",
+      "data_referencia": "2026-04-01",
+      "nome": "KINEA SECURITIES FII RESPONSABILIDADE LIMITADA",
+      "pl": "1792353559.67",
+      "cri": "",
+      "fii": "1470711.75",
+      "cotas_emitidas": "202202385",
+      "valor_cota_patrimonial": "",
+      "rentabilidade_mensal": "",
+      "dy_mensal": "",
+      "cotistas": "",
+      "taxa_admin": ""
+    },
+    "pdfs": [],
+    "status": "ok",
+    "erros": []
+  }
+}
