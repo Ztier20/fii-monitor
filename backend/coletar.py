@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from carteira import CARTEIRA
 from scraper.cvm import extrair_indicadores_cvm
-from scraper.fnet import scrape_fundo
+from scraper.gestoras import baixar_relatorios_gestora
 
 PASTA_DADOS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dados")
 PASTA_LOGS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "logs")
@@ -55,7 +55,7 @@ def coletar_fundo(ticker: str, info: dict, cvm_only: bool = False) -> dict:
         if indicadores:
             print(f"  [OK] CVM: data_ref={indicadores.get('data_referencia', 'N/A')} | "
                   f"PL={indicadores.get('pl', 'N/A')} | "
-                  f"DY={indicadores.get('dy_mensal', 'N/A')}")
+                  f"DY={indicadores.get('dy_mensal_pct', 'N/A')}%")
         else:
             print(f"  [AVISO] CVM: sem dados encontrados para {ticker}")
             resultado["erros"].append("CVM: sem dados")
@@ -63,20 +63,19 @@ def coletar_fundo(ticker: str, info: dict, cvm_only: bool = False) -> dict:
         print(f"  [ERRO] CVM: {e}")
         resultado["erros"].append(f"CVM: {e}")
 
-    # 2. PDFs via Fundos.NET
+    # 2. PDFs via gestoras (relatoriosfiis.com.br + FNET)
     if not cvm_only:
-        pasta_fundo = os.path.join(PASTA_DADOS, ticker.lower())
         try:
-            pdfs = scrape_fundo(ticker, info["cnpj"], PASTA_DADOS, meses=3)
+            pdfs = baixar_relatorios_gestora(ticker, PASTA_DADOS, meses=3)
             resultado["pdfs"] = pdfs
             if pdfs:
                 print(f"  [OK] {len(pdfs)} PDF(s) baixado(s)")
             else:
                 print(f"  [AVISO] Nenhum PDF baixado para {ticker}")
-                resultado["erros"].append("Fundos.NET: sem PDFs")
+                resultado["erros"].append("PDFs: sem relatórios encontrados")
         except Exception as e:
-            print(f"  [ERRO] Fundos.NET: {e}")
-            resultado["erros"].append(f"Fundos.NET: {e}")
+            print(f"  [ERRO] PDFs: {e}")
+            resultado["erros"].append(f"PDFs: {e}")
 
     if resultado["erros"]:
         resultado["status"] = "parcial" if resultado["cvm"] or resultado["pdfs"] else "erro"
